@@ -1,0 +1,29 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #fff3e0;
+}
+
+.header {
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.subheader {
+    letter-spacing: 2px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.burgerList {
+    padding: 3px;
+}
+
+.add-form {
+    text-align: center;
+    font-weight: bold;
+}
+
+.btn {
+    letter-spacing: 1px;
+}

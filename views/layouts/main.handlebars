@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eat-Da-Burger</title>
+
+    <!-- Link jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Link Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Link Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css" media="screen,projection" />
+
+    <!-- Link Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- Link Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+</head>
+
+<body>
+    {{{ body }}}
+
+    <script type="text/javascript">
+        // on click event to add new burger
+        $(".add-form").on("submit", function (event) {
+            event.preventDefault();
+
+            var newBurger = {
+                burger_name: $("#newBurger").val().trim(),
+                devoured: 0
+            };
+
+            // send ajax POST request
+            $.ajax("/api/burgers", {
+                type: "POST",
+                data: newBurger
+            }).then(function () {
+                console.log("Added a new burger.");
+                // reload page for updates
+                location.reload();
+            });
+        });
+
+        // on click event to devour burger (update)
+        $(".devourButton").on("click", function(event) {
+            event.preventDefault();
+
+            var id = $(this).data("id");
+            var newDevourState = {
+                devoured: 1
+            };
+
+            // send ajax PUT request
+            $.ajax("/api/burgers/" + id, {
+                type: "PUT",
+                data: newDevourState
+            }).then(function() {
+                console.log("Burger is devoured.");
+                // reload page for updates
+                location.reload();
+            });
+        });
+
+        // on click event to delete burger
+        $(".deleteButton").on("click", function(event) {
+            event.preventDefault();
+
+            var id = $(this).data("id");
+
+            // send ajax DELETE request
+            $.ajax("/api/burgers/" + id, {
+                type: "DELETE"
+            }).then(function() {
+                console.log("Burger is deleted.");
+                // reload page for updates
+                location.reload();
+            });
+        });
+    </script>
+</body>
+
+</html>
